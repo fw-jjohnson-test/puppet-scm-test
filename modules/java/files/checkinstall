@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+package="SUNWj6cfg"
+expected_release="(1.6.0_43)"
+release=`pkginfo -x | grep ${package} | awk '{print $6""}'`
+
+#echo "DEBUG:  got variable data."
+
+if [ ! "${release}" ]; then
+        release="absent"
+#       echo "DEBUG:  set release to absent."
+fi
+
+#echo "DEBUG:  release value:  ${release}"
+#echo "DEBUG:  expected_release value: ${expected_release}"
+
+if [ ${release} = ${expected_release} ]; then
+    echo "\n\n\n\tThe ${package} package is already at ${release} on this machine.\n"
+    echo "\tAborting installation of this package.\n\n\n"
+    exit 1
+fi
+
+exit 0
